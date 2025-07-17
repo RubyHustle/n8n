@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: n8n-rubyhustle
+    env: docker
+    plan: free
+    repo: https://github.com/RubyHustle/n8n
+    branch: main
+    dockerfilePath: ./Dockerfile
+    autoDeploy: false
+
+    envVars:
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"
+      - key: N8N_BASIC_AUTH_USER
+        fromEnvVar: N8N_BASIC_AUTH_USER
+      - key: N8N_BASIC_AUTH_PASSWORD
+        fromEnvVar: N8N_BASIC_AUTH_PASSWORD
+      - key: WEBHOOK_URL
+        fromEnvVar: WEBHOOK_URL
+      - key: GENERIC_TIMEZONE
+        value: Asia/Kolkata
+      - key: EXECUTIONS_MODE
+        value: queue
+      - key: QUEUE_MODE
+        value: redis
+      - key: N8N_HOST
+        value: n8n-rubyhustle.onrender.com
+      - key: N8N_PORT
+        value: "5678"
+      - key: N8N_EDITOR_BASE_URL
+        value: https://n8n-rubyhustle.onrender.com
+      - key: DB_TYPE
+        value: sqlite
+      - key: DB_SQLITE_VACUUM_ON_STARTUP
+        value: "true"
